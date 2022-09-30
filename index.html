@@ -1,0 +1,30 @@
+<head>
+
+    <script defer src="pyscript.js"></script>
+</head>
+<body style="text-align: center;">
+    <div>Type decrypt code here: </div>
+  <input type="text" id="test-input"/>
+  <button id="submit-button" type="sulm;bmit" pys-onClick="decrypt">OK</button>
+  <p>This is encrypted code: </p>
+  <p>gAAAAABjNvRN-Ff10abU5VNpTviSlCKWSBqui2leMXM6MS_lc4rlM3YeNWqpMJ6d4ObuR-0p6DV24ywogxxEIMBRETlp_D6Ynx1rv4q8nXye7d10QJrm400=</p>
+  <p>Output will be here:</p>
+    <p id="test-output"></p>
+  <py-env>
+    - cryptography
+</py-env>
+
+<py-script>
+from js import console
+from cryptography.fernet import Fernet
+
+def decrypt(*args, **kwargs):
+    try:
+        key = Element('test-input').element.value.encode()
+        cipher_suite = Fernet(key)
+        out = cipher_suite.decrypt(b"gAAAAABjNvRN-Ff10abU5VNpTviSlCKWSBqui2leMXM6MS_lc4rlM3YeNWqpMJ6d4ObuR-0p6DV24ywogxxEIMBRETlp_D6Ynx1rv4q8nXye7d10QJrm400=")
+    except:
+        Element('test-output').element.innerText = "WRONG PASSWORD!"
+    Element('test-output').element.innerText = "You have finished this challenge, the password is: " + out.decode()
+</py-script>
+</body>
